@@ -1,0 +1,97 @@
+import NavBar from '../components/home/NavBar'
+import Input from '../components/form/Input'
+import { useState } from 'react';
+import useFetchApiCall from '../hooks/useFetchApiCall';
+import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
+
+const ConfirmOTP = () => {
+
+    const alert = useAlert()
+
+    const { apiCall } = useFetchApiCall()
+
+    const navigate = useNavigate()
+
+    const data = JSON.parse(localStorage.getItem("data"))
+
+    const [otp, setotp] = useState("");
+
+    const onChange = (id, value) => {
+        setotp(value);
+    };
+
+
+    const registerUser = async (e) => {
+        e.preventDefault();
+
+        if (otp.length !== 6) {
+            alert.error("OTP is must be 6 digit")
+            return
+        }
+
+        if (+otp === +data.otp) {
+
+            try {
+                const response = await apiCall("/auth", "POST", data)
+                console.log(response)
+                if (response.success) {
+                    localStorage.setItem("userData", JSON.stringify(response.user))
+                    localStorage.removeItem("data")
+                    navigate("/")
+                } else {
+                    alert.error(response.message)
+                }
+            } catch (error) {
+                alert.error(error.message)
+            }
+        } else {
+            alert.error("Enter a valid OTP")
+        }
+
+    };
+
+    return (
+        <div>
+            <NavBar />
+
+            <div className="mx-auto max-w-xl mt-4 center">
+                <form>
+                    <div>
+                        <Input
+                            onClick={onChange}
+                            name="Enter opt"
+                            type="text"
+                            placeholder="Enter your OTP..."
+                            id="otp"
+                            value={otp}
+                        />
+                        <div className="mt-6">
+                            <button
+                                type="submit"
+                                onClick={registerUser}
+                                className="w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Verified / Register
+                            </button>
+                        </div>
+                        <div className="flex justify-around mt-2">
+                            <div
+                                className="text-blue-600 underline cursor-pointer"
+                                onClick={() => {
+                                    navigate("/register")
+                                }}
+                            >
+                                Change Number?
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    )
+}
+
+export default ConfirmOTP
