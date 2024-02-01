@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../components/form/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import NavBar from "../components/home/NavBar";
+import NavBar from "../components/common/NavBar";
 import useFetchApiCall from '../hooks/useFetchApiCall';
 
 

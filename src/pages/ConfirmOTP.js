@@ -1,11 +1,14 @@
-import NavBar from '../components/home/NavBar'
+import NavBar from '../components/common/NavBar'
 import Input from '../components/form/Input'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import useFetchApiCall from '../hooks/useFetchApiCall';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert';
+import { UserContext } from '../context/UserContext';
 
 const ConfirmOTP = () => {
+
+    const { setUser } = useContext(UserContext)
 
     const alert = useAlert()
 
@@ -36,8 +39,8 @@ const ConfirmOTP = () => {
                 const response = await apiCall("/auth", "POST", data)
                 console.log(response)
                 if (response.success) {
-                    localStorage.setItem("userData", JSON.stringify(response.user))
                     localStorage.removeItem("data")
+                    setUser(response.user)
                     navigate("/")
                 } else {
                     alert.error(response.message)

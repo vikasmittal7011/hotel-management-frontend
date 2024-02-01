@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Input from "../components/form/Input"
-import NavBar from "../components/home/NavBar"
+import NavBar from "../components/common/NavBar"
 import { Link, useNavigate } from "react-router-dom";
 import useFetchApiCall from "../hooks/useFetchApiCall";
 import { useAlert } from "react-alert";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
+
+    const { setUser } = useContext(UserContext)
 
     const alert = useAlert()
 
@@ -28,7 +31,7 @@ const Login = () => {
         console.log(response)
         if (response.success) {
             alert.success("Login suucess")
-            localStorage.setItem("userData", JSON.stringify(response.user))
+            setUser(response.user)
             navigate("/")
         } else {
 
