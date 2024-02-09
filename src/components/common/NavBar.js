@@ -7,7 +7,7 @@ const NavBar = () => {
   const { user } = useContext(UserContext)
 
   return <div>
-    <header className="flex justify-between">
+    <header className="flex justify-between items-center">
 
       <Link to="/">
         <div className="flex gap-1">
@@ -17,7 +17,7 @@ const NavBar = () => {
           <span className="font-bold">Tour</span>
         </div></Link>
 
-      <div className="flex border border-1 border-gray-300 rounded-full items-center gap-3 px-5 py-1 shadow-md shadow-gray-300">
+      <div className="xs:hidden md:flex border border-1 border-gray-300 rounded-full items-center gap-3 px-5 py-1 shadow-md shadow-gray-300">
         <div>Anywhere</div>
         <div className="border-l border-gray-300 border-y-8" ></div>
         <div>Any Week</div>
