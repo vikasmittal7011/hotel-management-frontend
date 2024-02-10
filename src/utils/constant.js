@@ -43,3 +43,48 @@ export const perks = [
 
     },
 ]
+
+export const validHotelInfo = (hotelInfo, perk, images) => {
+    if (hotelInfo.checkIn === "") {
+        return { success: false, message: "Enter valid checkIn time" }
+    }
+    else if (hotelInfo.checkOut === "") {
+        return { success: false, message: "Enter valid checkOut time" }
+    }
+    else if (hotelInfo.city === "") {
+        return { success: false, message: "Enter valid city" }
+    }
+    else if (hotelInfo.country === "") {
+        return { success: false, message: "Enter valid country" }
+    }
+    else if (hotelInfo.discription === "") {
+        return { success: false, message: "Enter valid discription" }
+    }
+    else if (hotelInfo.extraInfo === "") {
+        return { success: false, message: "Enter valid extraInfo" }
+    }
+    else if (hotelInfo.maxGuests === "") {
+        return { success: false, message: "Enter valid maxGuests" }
+    }
+    else if (hotelInfo.pin === "") {
+        return { success: false, message: "Enter pin" }
+    }
+    else if (hotelInfo.price === "") {
+        return { success: false, message: "Enter valid price" }
+    }
+    else if (hotelInfo.state === "") {
+        return { success: false, message: "Enter valid state" }
+    }
+    else if (hotelInfo.street === "") {
+        return { success: false, message: "Enter valid street" }
+    }
+    else if (hotelInfo.title === "") {
+        return { success: false, message: "Enter valid title" }
+    } else if (perk.length === 0) {
+        return { success: false, message: "Select aleast 1 perk" }
+    } else if (images.length < 5) {
+        return { success: false, message: "Select aleast 5 images" }
+    } else {
+        return { success: true }
+    }
+}

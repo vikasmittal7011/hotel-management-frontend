@@ -2,9 +2,14 @@ import { Link, useParams } from "react-router-dom"
 import NavBar from "../components/common/NavBar"
 import Infomation from "../components/profile/Infomation"
 import Booking from "../components/profile/Booking"
-import Places from "../components/profile/Places"
+import AddHotelForm from "../components/profile/AddHotelForm"
+import { useContext } from "react"
+import { UserContext } from "../context/UserContext"
+import AdminBooking from "../components/profile/AdminBooking"
 
 const Profile = () => {
+
+    const { user } = useContext(UserContext)
 
     const { subpage } = useParams()
 
@@ -14,14 +19,16 @@ const Profile = () => {
 
             <nav className="w-full flex justify-center mt-8 gap-2">
                 <Link to="/profile" className={`py-2 px-6 ${subpage === undefined && "bg-primary text-white rounded-full"}`}>Profile</Link>
-                <Link to="/profile/booking" className={`py-2 px-6 ${subpage === "booking" && "bg-primary text-white rounded-full"}`}>My Booking</Link>
-                <Link to="/profile/places" className={`py-2 px-6 ${subpage === "places" && "bg-primary text-white rounded-full"}`}>My Acommandation</Link>
+                {user.role === "user" && <Link to="/profile/booking" className={`py-2 px-6 ${subpage === "booking" && "bg-primary text-white rounded-full"}`}>My Booking</Link>}
+                {user.role === "admin" && <Link to="/profile/admin-booking" className={`py-2 px-6 ${subpage === "admin-booking" && "bg-primary text-white rounded-full"}`}> Booking's</Link>}
+                {user.role === "admin" && <Link to="/profile/add-hotel" className={`py-2 px-6 ${subpage === "add-hotel" && "bg-primary text-white rounded-full"}`}>Add Hotel</Link>}
             </nav>
 
             <div>
                 {subpage === undefined && <Infomation />}
-                {subpage === "booking" && <Booking />}
-                {subpage === "places" && <Places />}
+                {user.role === "user" && <>{subpage === "booking" && <Booking />}</>}
+                {user.role === "admin" && <>{subpage === "admin-booking" && <AdminBooking />}</>}
+                {user.role === "admin" && <>{subpage === "add-hotel" && <AddHotelForm />}</>}
             </div>
 
         </div>

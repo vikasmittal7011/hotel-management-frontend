@@ -4,12 +4,13 @@ import { useEffect, useState } from "react"
 import useFetchApiCall from "../../hooks/useFetchApiCall"
 import { useAlert } from "react-alert"
 import Card from "../hotel/Card"
+import Loader from "../common/Loader"
 
 const Hotels = () => {
 
     const alert = useAlert()
 
-    const { apiCall } = useFetchApiCall()
+    const { apiCall, loading } = useFetchApiCall()
 
     const [hotels, setHotels] = useState([]);
 
@@ -27,11 +28,13 @@ const Hotels = () => {
     }, []);
 
     return (
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-            {hotels.length > 0 &&
-                hotels.map((hotel, i) => (<Card key={i} hotel={hotel} />))
-            }
-        </div>
+        <>
+            {loading ? <Loader /> : <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+                {hotels.length > 0 &&
+                    hotels.map((hotel, i) => (<Card key={i} hotel={hotel} />))
+                }
+            </div>}
+        </>
     )
 }
 

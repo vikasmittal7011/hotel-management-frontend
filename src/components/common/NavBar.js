@@ -42,7 +42,7 @@ const NavBar = () => {
           </div>
           {user && (
             <div>
-              {user.name}
+              {user.name.substring(0, 5)}...
             </div>
           )}
         </div>

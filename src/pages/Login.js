@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useFetchApiCall from "../hooks/useFetchApiCall";
 import { useAlert } from "react-alert";
 import { UserContext } from "../context/UserContext";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
 
@@ -14,7 +15,7 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-    const { apiCall } = useFetchApiCall()
+    const { apiCall, loading } = useFetchApiCall()
 
     const [credentials, setcredentials] = useState({
         email: "",
@@ -27,16 +28,30 @@ const Login = () => {
 
     const loginuser = async (e) => {
         e.preventDefault()
-        const response = await apiCall("/auth/login", "POST", credentials)
-        console.log(response)
-        if (response.success) {
-            alert.success("Login suucess")
-            setUser(response.user)
-            navigate("/")
-        } else {
 
-            alert.error(response.message)
+        if (credentials.email === "" || credentials.password === "") {
+            alert.error("Enter valid credentials!!")
+            return;
         }
+
+        if (loading === true) {
+            return;
+        }
+
+        try {
+            const response = await apiCall("/auth/login", "POST", credentials)
+            console.log(response)
+            if (response.success) {
+                alert.success("Login suucess")
+                setUser(response.user)
+                navigate("/")
+            } else {
+                alert.error(response.message)
+            }
+        } catch (error) {
+            alert.error(error.message)
+        }
+
     }
 
     return (
@@ -53,7 +68,7 @@ const Login = () => {
                         <Input onClick={onChange} name="Pasword" type="password" placeholder="Enter your paasword..." id="password" value={credentials.password} />
 
                         <div className="mt-6">
-                            <button type="submit" onClick={loginuser} className="w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>
+                            <button disabled={loading} type="submit" onClick={loginuser} className={`w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex justify-center items-center gap-2 ${loading ? "cursor-not-allowed" : "cursor-pointer"} `}> <ClipLoader color='white' size="20px" loading={loading} /> <div>Login</div> </button>
                         </div>
                         <div className="flex justify-around mt-2">
                             <p>Don't have an account yet? <Link to="/register" className="text-blue-600 underline">Register</Link></p>

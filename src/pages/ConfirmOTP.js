@@ -5,6 +5,7 @@ import useFetchApiCall from '../hooks/useFetchApiCall';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import { UserContext } from '../context/UserContext';
+import { ClipLoader } from 'react-spinners';
 
 const ConfirmOTP = () => {
 
@@ -12,7 +13,7 @@ const ConfirmOTP = () => {
 
     const alert = useAlert()
 
-    const { apiCall } = useFetchApiCall()
+    const { apiCall, loading } = useFetchApiCall()
 
     const navigate = useNavigate()
 
@@ -30,6 +31,10 @@ const ConfirmOTP = () => {
 
         if (otp.length !== 6) {
             alert.error("OTP is must be 6 digit")
+            return
+        }
+
+        if (loading) {
             return
         }
 
@@ -71,11 +76,12 @@ const ConfirmOTP = () => {
                         />
                         <div className="mt-6">
                             <button
+                                disabled={loading}
                                 type="submit"
                                 onClick={registerUser}
-                                className="w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className={`w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex justify-center items-center gap-2 ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
                             >
-                                Verified / Register
+                                <ClipLoader color='white' size="20" loading={loading} />  <div>Verified / Register</div>
                             </button>
                         </div>
                         <div className="flex justify-around mt-2">
@@ -85,15 +91,15 @@ const ConfirmOTP = () => {
                                     navigate("/register")
                                 }}
                             >
-                                Change Number?
+                                Change Email?
                             </div>
                         </div>
                     </div>
                 </form>
-            </div>
+            </div >
 
 
-        </div>
+        </div >
     )
 }
 

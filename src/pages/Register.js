@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import NavBar from "../components/common/NavBar";
 import useFetchApiCall from '../hooks/useFetchApiCall';
+import { ClipLoader } from "react-spinners";
 
 
 const Register = () => {
     const alert = useAlert();
 
-    const { apiCall } = useFetchApiCall()
+    const { apiCall, loading } = useFetchApiCall()
 
     const navigate = useNavigate();
 
@@ -28,9 +29,13 @@ const Register = () => {
             e.preventDefault();
         }
 
-        if (credentials.password.length < 4) {
-            alert.error("Password must be 4 letters");
+        if (credentials.password.length < 4 || credentials.email === "" || credentials.name === "") {
+            alert.error("Enter valid credentials1!!");
             return;
+        }
+
+        if (loading) {
+            return
         }
 
         try {
@@ -90,11 +95,12 @@ const Register = () => {
                         <div id="sign-in-button" className="items-center" />
                         <div className="mt-6">
                             <button
+                                disabled={loading}
                                 type="submit"
                                 onClick={sendOTP}
-                                className="w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className={`w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${loading ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-2`}
                             >
-                                Send OTP
+                                <ClipLoader color='white' size="20" loading={loading} />  <div>Send OTP</div>
                             </button>
                         </div>
                         <div className="flex justify-around mt-2">
