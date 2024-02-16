@@ -109,3 +109,7 @@ export const amountAfterTax = (hotel, bookingInfo, setBookingInfo) => {
         setBookingInfo({ ...bookingInfo, totalAmount })
     }
 }
+
+export const classNames = (...classes) => {
+    return classes.filter(Boolean).join(' ')
+}

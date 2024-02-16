@@ -6,6 +6,7 @@ import AddHotelForm from "../components/profile/AddHotelForm"
 import { useContext } from "react"
 import { UserContext } from "../context/UserContext"
 import AdminBooking from "../components/profile/AdminBooking"
+import MobileNav from "../components/profile/MobileNav"
 
 const Profile = () => {
 
@@ -17,12 +18,14 @@ const Profile = () => {
         <div>
             <NavBar />
 
-            <nav className="w-full flex justify-center mt-8 gap-2">
+            <nav className="w-full hidden md:flex justify-center mt-8 gap-2">
                 <Link to="/profile" className={`py-2 px-6 ${subpage === undefined && "bg-primary text-white rounded-full"}`}>Profile</Link>
                 {user.role === "user" && <Link to="/profile/booking" className={`py-2 px-6 ${subpage === "booking" && "bg-primary text-white rounded-full"}`}>My Booking</Link>}
                 {user.role === "admin" && <Link to="/profile/admin-booking" className={`py-2 px-6 ${subpage === "admin-booking" && "bg-primary text-white rounded-full"}`}> Booking's</Link>}
                 {user.role === "admin" && <Link to="/profile/add-hotel" className={`py-2 px-6 ${subpage === "add-hotel" && "bg-primary text-white rounded-full"}`}>Add Hotel</Link>}
             </nav>
+
+            <MobileNav user={user} />
 
             <div>
                 {subpage === undefined && <Infomation />}
