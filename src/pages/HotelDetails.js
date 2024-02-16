@@ -1,16 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import NavBar from "../components/common/NavBar"
 import { useAlert } from "react-alert"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import useFetchApiCall from "../hooks/useFetchApiCall"
 import Loader from "../components/common/Loader"
 import Images from "../components/hotel/Images"
 import BookingCard from "../components/hotel/BookingCard"
 import AllImages from "../components/hotel/AllImages"
 import { perks } from "../utils/constant"
+import { UserContext } from "../context/UserContext"
+import ConfirmDelereModal from "../components/hotel/ConfirmDelereModal"
 
 const HotelDetails = () => {
+
+    const navigate = useNavigate()
+
+    const { user } = useContext(UserContext)
 
     const { id } = useParams()
 
@@ -19,6 +25,8 @@ const HotelDetails = () => {
     const [hotel, setHotel] = useState({});
 
     const [showImages, setShowImages] = useState(false);
+
+    const [open, setOpen] = useState(false)
 
     const { apiCall, loading } = useFetchApiCall()
 
@@ -53,10 +61,18 @@ const HotelDetails = () => {
     return (
         <div>
             <NavBar />
+            <ConfirmDelereModal open={open} setOpen={setOpen} id={hotel.id} />
             {loading ?
                 <Loader />
                 :
                 <div className="overflow-visible">
+                    {user.role === "admin" &&
+                        <div className="flex justify-between">
+                            <button onClick={() => { navigate(`/edit-hotel/${hotel.id}`) }} className="mt-5 md:mx-5 bg-primary text-white w-auto px-5 py-2 rounded-md">Edit</button>
+                            <button onClick={() => { setOpen(true) }} className="mt-5 md:mx-5 bg-gray-500 text-white w-auto px-5 py-2 rounded-md">Delete</button>
+                        </div>
+                    }
+
                     {hotel?.title && (
                         <div className="mt-8 md:mx-5">
 

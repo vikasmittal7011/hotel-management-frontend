@@ -183,7 +183,7 @@ const AddHotelForm = () => {
                     </div>
                 </div>
 
-                <CheckBox handleChnage={handleCheckBox} options={perks} id="perks" name="Perks" />
+                <CheckBox handleChnage={handleCheckBox} options={perks} id="perks" name="Perks" checkedValues={perk} />
 
                 <div className="max-w-full">
                     <TextArea name="Extra Informations" placeholder="Enter extra ingo..." id="extraInfo" type="text" value={hotelInfo.extraInfo} onClick={handleChange} />

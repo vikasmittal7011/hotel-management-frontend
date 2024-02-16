@@ -1,5 +1,5 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { Bars3Icon } from "@heroicons/react/24/outline"
 import { Fragment, useRef } from "react"
 import { Link } from "react-router-dom"
 
@@ -20,14 +20,11 @@ const MobileNav = ({ user }) => {
                             <div className="relative flex h-16 items-center justify-between">
                                 <Menu as="div" className="relative ml-3">
                                     <div>
+                                        {/* eslint-disable react/no-children-prop */}
                                         <Menu.Button ref={buttonRef}>
-                                            <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                                                {open ? (
-                                                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                                                ) : (
-                                                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                                                )}
-                                            </Disclosure.Button>
+                                            <div className="relative inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                                            </div>
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -40,7 +37,7 @@ const MobileNav = ({ user }) => {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items className="absolute left-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none flex flex-col">
-                                            s                   <Menu.Item>
+                                            <Menu.Item>
                                                 <Link onClick={hanleClick} to="/profile" className={`py-2 px-6`}>Profile</Link>
                                             </Menu.Item>
                                             {user.role === "user" &&

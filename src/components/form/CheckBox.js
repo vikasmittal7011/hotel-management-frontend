@@ -1,4 +1,4 @@
-const CheckBox = ({ options, id, name, handleChnage }) => {
+const CheckBox = ({ options, id, name, handleChnage, checkedValues }) => {
 
     const handleClick = (e) => {
         handleChnage(e.target)
@@ -13,7 +13,8 @@ const CheckBox = ({ options, id, name, handleChnage }) => {
                         <div key={i} className="flex gap-x-3 pt-1 m-1 cursor-pointer">
                             <div className="flex h-6 items-center">
                                 <input
-                                    onClick={handleClick}
+                                    checked={checkedValues.includes(option.value)}
+                                    onChange={handleClick}
                                     id={option.value}
                                     name={id}
                                     type="checkbox"
