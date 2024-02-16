@@ -5,9 +5,10 @@ import { useAlert } from "react-alert"
 import { useEffect, useState } from "react"
 import useFetchApiCall from "../hooks/useFetchApiCall"
 import Loader from "../components/common/Loader"
-import { Carousel } from "react-responsive-carousel"
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Input from "../components/form/Input"
+import Images from "../components/hotel/Images"
+import BookingCard from "../components/hotel/BookingCard"
+import AllImages from "../components/hotel/AllImages"
+import { perks } from "../utils/constant"
 
 const HotelDetails = () => {
 
@@ -19,25 +20,7 @@ const HotelDetails = () => {
 
     const [showImages, setShowImages] = useState(false);
 
-    const [bookingInfo, setBookingInfo] = useState({
-        checkIn: "",
-        checkOut: "",
-    });
-
-    const [guest, setGuest] = useState(1);
-
     const { apiCall, loading } = useFetchApiCall()
-
-    const onChange = (id, value) => {
-        setBookingInfo({ ...bookingInfo, [id]: value })
-    }
-
-    const handleGuestNumber = (id, value) => {
-        if (+value === +0) {
-            setGuest(1)
-        } else { setGuest(value) }
-
-    }
 
     const getHotel = async () => {
         try {
@@ -52,9 +35,9 @@ const HotelDetails = () => {
         }
     }
 
-    const amountAfterTax = () => {
-        const amount = (hotel.price * guest) * (18 / 100)
-        return (amount + (hotel.price * guest))
+    const getSVG = (p) => {
+        const a = perks.filter((pr) => pr.value === p && pr.svg)
+        return a[0].svg
     }
 
     useEffect(() => {
@@ -63,28 +46,7 @@ const HotelDetails = () => {
 
     if (showImages) {
         return <>
-            <div className="absolute bg-black text-white inset-0 min-h-screen flex justify-center">
-                <div className="p-8 grid">
-                    <div>
-                        <button onClick={() => setShowImages(false)} className="fixed bg-white text-black flex gap-2 px-2 py-1 rounded-xl right-8 top-24 opacity-80" >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                            Close
-                        </button>
-                        <h1 className="text-2xl font-bold mb-5">{hotel.title}</h1>
-                    </div>
-                    {hotel?.photos?.length > 0 && (
-                        hotel?.photos?.map((img) => (
-                            <>
-                                <div>
-                                    <img alt="" src={img} className="acpect-square object-cover mb-5 rounded-xl" width={800} height={800} />
-                                </div>
-                            </>
-                        ))
-                    )}
-                </div>
-            </div>
+            <AllImages hotel={hotel} setShowImages={setShowImages} />
         </>
     }
 
@@ -96,7 +58,7 @@ const HotelDetails = () => {
                 :
                 <div className="overflow-visible">
                     {hotel?.title && (
-                        <div className="mt-8 mx-5">
+                        <div className="mt-8 md:mx-5">
 
                             <div>
                                 <h1 className="font-bold xs:text-xl md:text-2xl lg:text-3xl">{hotel?.title}</h1>
@@ -105,54 +67,58 @@ const HotelDetails = () => {
 
                             <div className="flex gap-5 mt-2 flex-col lg:flex-row">
 
-                                <div className=" basis-3/4">
-                                    <Carousel autoPlay interval={2000} infiniteLoop showThumbs={false}>
-                                        {hotel.photos.map((image, index) => (
-                                            <div onClick={() => setShowImages(true)} key={index} className="aspect-h-5 aspect-w-4 cursor-pointer">
-                                                <img
-                                                    src={image}
-                                                    alt={image}
-                                                    className="object-cover h-[470px] rounded-md"
-                                                />
-                                            </div>
-                                        ))}
-                                    </Carousel>
-                                </div>
+                                <Images hotel={hotel} setShowImages={setShowImages} />
 
-                                <div className="basis-1/4 border p-5 bg-gray-200 rounded-2xl flex flex-col justify-evenly">
-                                    <h1 className="text-2xl font-bold">₹ {hotel.price}/- Per Nigth</h1>
-
-                                    <div className=" rounded-md p-2 bg-gray-300">
-                                        <div className="flex">
-                                            <Input name="CheckIn" id="checkIn" text="lg" type="datetime-local" onClick={onChange} value={bookingInfo.checkIn} />
-                                            <Input name="CheckOut" id="checkOut" text="lg" type="datetime-local" onClick={onChange} value={bookingInfo.checkOut} />
-                                        </div>
-                                        <div className="-mt-7">
-                                            <Input name="Number Of Guest" text="lg" id="guest" type="number" onClick={handleGuestNumber} value={guest} />
-                                        </div>
-                                    </div>
-
-                                    <button className="bg-primary text-white w-full rounded-md py-3">Book Now</button>
-
-                                    <div className="border-b-2 border-gray-600" />
-
-                                    <div className="flex justify-between items-center">
-                                        <p>₹ {hotel.price} X {guest} Night</p>
-                                        <p>₹ {hotel.price * guest}</p>
-
-                                    </div>
-
-                                    <div className="border-b-[1px] border-gray-600" />
-
-                                    <div className="flex justify-between items-center">
-                                        <p>Total After 18% Tax</p>
-                                        <p>₹ {amountAfterTax()}</p>
-                                    </div>
-
-                                </div>
+                                <BookingCard hotel={hotel} />
 
                             </div>
 
+                            <div className="border-b-[1px] border-gray-400 mt-10" />
+
+                            <div className="mt-10">
+                                <h1 className="text-xl md:text-3xl font-bold">Discription</h1>
+                                <p className="my-3 text-gray-600 text-justify">
+                                    {hotel.discription}
+                                </p>
+                                <h1 className="text-xl md:text-3xl font-bold">Extra Info</h1>
+                                <p className="my-3 text-gray-600 text-justify">
+                                    {hotel.extraInfo}
+                                </p>
+                            </div>
+
+                            <div className="border-b-[1px] border-gray-400 mt-10" />
+
+                            <div className="mt-10">
+                                <h1 className="text-xl md:text-3xl font-bold">Perks</h1>
+                                {hotel.perks.map((p, i) => (
+                                    <div key={i} className="my-3 text-gray-600 flex gap-2">
+                                        &#x2022; <div>{getSVG(p)}</div> {p}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="border-b-[1px] border-gray-400 mt-10" />
+
+                            <div className="mt-10">
+                                <h1 className="text-xl md:text-3xl font-bold">Hotel Rules</h1>
+                                <p className="my-3 text-gray-600 flex items-center gap-2">
+                                    <b>CheckIn After</b> :- {hotel.checkIn} AM
+                                </p>
+                                <p className="my-3 text-gray-600 flex items-center gap-2">
+                                    <b>CheckOut Before</b> :- {hotel.checkOut} PM
+                                </p>
+                                <p className="my-3 text-gray-600 flex items-center gap-2">
+                                    <b>Number Of Guest</b> :- {hotel.maxGuests}
+                                </p>
+                            </div>
+                            <div className="border-b-[1px] border-gray-400 mt-10" />
+
+                            <div className="mt-10">
+                                <h1 className="text-xl md:text-3xl font-bold">Address</h1>
+                                <p className="my-3 text-gray-600 flex items-center gap-2">
+                                    {hotel.street}, {hotel.state},<br /> {hotel.city}, {hotel.pin}, <br /> {hotel.country}
+                                </p>
+                            </div>
 
                         </div>
                     )}

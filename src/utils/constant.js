@@ -88,3 +88,24 @@ export const validHotelInfo = (hotelInfo, perk, images) => {
         return { success: true }
     }
 }
+
+export const paymentMathods = [
+    { id: 1, name: "Cash" },
+    { id: 1, name: "Card" },
+]
+
+export const amountAfterTax = (hotel, bookingInfo, setBookingInfo) => {
+    const amount = (hotel.price * bookingInfo.guest) * (18 / 100)
+
+    if (bookingInfo.checkIn && bookingInfo.checkOut) {
+        const differenceMS = Math.abs(new Date(bookingInfo.checkIn) - new Date(bookingInfo.checkOut))
+
+        const days = Math.ceil(differenceMS / (1000 * 60 * 60 * 24))
+
+        const totalAmount = (amount + (hotel.price * bookingInfo.guest)) * days
+        setBookingInfo({ ...bookingInfo, totalAmount, days })
+    } else {
+        const totalAmount = (amount + (hotel.price * bookingInfo.guest))
+        setBookingInfo({ ...bookingInfo, totalAmount })
+    }
+}

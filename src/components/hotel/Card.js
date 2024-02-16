@@ -4,7 +4,7 @@ const Card = ({
     hotel
 }) => {
     return (
-        <Link to={`/hotel/${hotel?.id}`} className="rounded-xl overflow-hidden shadow-lg cursor-pointer ">
+        <Link to={`/hotel/${hotel?.id}`} className="rounded-xl overflow-hidden shadow-lg cursor-pointer">
             <img className="w-full" src={hotel?.photos?.[0]} alt="Mountain" />
             <div className="px-3 py-4">
                 <div className='flex justify-between items-center'>

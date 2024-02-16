@@ -29,7 +29,7 @@ const Hotels = () => {
 
     return (
         <>
-            {loading ? <Loader /> : <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+            {loading ? <Loader /> : <div className="py-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
                 {hotels.length > 0 &&
                     hotels.map((hotel, i) => (<Card key={i} hotel={hotel} />))
                 }
