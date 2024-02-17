@@ -1,8 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react"
+import useFetchApiCall from "../../hooks/useFetchApiCall"
+import Loader from "../common/Loader"
+import BookingCard from "./BookingCard";
+
 const AdminBooking = () => {
+
+    const [booking, setBooking] = useState([]);
+
+    const { apiCall, loading } = useFetchApiCall()
+
+    const getMyBooking = async () => {
+        const response = await apiCall("/booking/admin")
+        setBooking(response.booking)
+    }
+
+    useEffect(() => {
+        getMyBooking()
+    }, []);
+
     return (
-        <div>
-            AdminBooking
-        </div>
+        <>
+            {loading ? <Loader /> :
+                <div>
+                    {booking.length > 0 ? <BookingCard booking={booking} /> :
+                        <h1 className="font-bold text-center my-2 md:my-10 text-xl md:text-2xl">You don't book any hotel yet!!</h1>
+                    }
+                </div>
+            }
+        </>
     )
 }
 

@@ -65,7 +65,6 @@ const AddHotelForm = () => {
                 const response = await fetch(imageURL)
                 const blob = await response.blob();
 
-                // Read the blob as a data URL
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setImages([...images, reader.result])
@@ -73,7 +72,6 @@ const AddHotelForm = () => {
                 };
                 reader.readAsDataURL(blob);
             } catch (Err) {
-                console.log(Err.message)
             }
 
         }

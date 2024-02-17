@@ -110,6 +110,14 @@ export const amountAfterTax = (hotel, bookingInfo, setBookingInfo) => {
     }
 }
 
+export const numbersOfNigts = (checkIn, checkOut) => {
+
+    const differenceMS = Math.abs(new Date(checkIn) - new Date(checkOut))
+
+    return Math.ceil(differenceMS / (1000 * 60 * 60 * 24))
+
+}
+
 export const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }

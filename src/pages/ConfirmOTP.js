@@ -42,7 +42,6 @@ const ConfirmOTP = () => {
 
             try {
                 const response = await apiCall("/auth", "POST", data)
-                console.log(response)
                 if (response.success) {
                     localStorage.removeItem("data")
                     setUser(response.user)

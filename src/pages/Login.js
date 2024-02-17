@@ -40,7 +40,6 @@ const Login = () => {
 
         try {
             const response = await apiCall("/auth/login", "POST", credentials)
-            console.log(response)
             if (response.success) {
                 alert.success("Login suucess")
                 setUser(response.user)

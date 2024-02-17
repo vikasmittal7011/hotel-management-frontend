@@ -77,7 +77,6 @@ const EditHotelForm = () => {
                 };
                 reader.readAsDataURL(blob);
             } catch (Err) {
-                console.log(Err.message)
             }
 
         }
@@ -104,7 +103,6 @@ const EditHotelForm = () => {
         if (success) {
             try {
                 const response = await apiCall("/hotel/update", 'POST', { ...hotelInfo, images, perk })
-                console.log(response)
                 if (response.success) {
                     alert.success("Hotel added successfully")
                     navigate(`/hotel/${hotelInfo.id}`)

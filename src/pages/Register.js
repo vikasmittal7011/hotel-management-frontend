@@ -40,7 +40,6 @@ const Register = () => {
 
         try {
             const response = await apiCall("/auth/otp", "POST", credentials)
-            console.log(response.message)
             if (response.success) {
                 const data = { ...credentials, otp: response.otp }
                 localStorage.setItem("data", JSON.stringify(data))
