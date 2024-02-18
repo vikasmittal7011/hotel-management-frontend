@@ -1,3 +1,26 @@
+export const ITEM_PAGE_PER = 10
+
+export const Classes = {
+    h1_size:
+        "2xl:text-6xl lg:text-3xl md:text-2xl sm:text-xl l:text-xl s:text-xl",
+    commonClass: "cursor-pointer relative items-center py-2",
+
+    commonBTNClass:
+        "bg-white px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 inline-flex  rounded-md border border-gray-300",
+
+    commonSreenBTNClass:
+        "inline-flex px-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0",
+
+    hoverClass:
+        "hidden px-4 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex",
+
+    activeClass:
+        "z-10 inline-flex bg-indigo-600 px-4 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+
+    flexDirectionClass:
+        "lg:flex-row md:flex-row sm:flex-row l:flex-col s:flex-col xs:flex-col",
+};
+
 export const perks = [
     {
         value: "Wifi",

@@ -5,6 +5,7 @@ import { useState } from 'react';
 const useFetchApiCall = () => {
   // const { showToast } = useToastBox();
   const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState();
 
   const apiCall = async (
     api,
@@ -32,6 +33,7 @@ const useFetchApiCall = () => {
 
       const data = await response.json();
       if (data.success) {
+        setTotal(response.headers.get("X-Total-Count"))
         return data;
       } else {
         // showToast('Error', data.message, 'error');
@@ -42,7 +44,7 @@ const useFetchApiCall = () => {
     }
   };
 
-  return { loading, apiCall };
+  return { loading, apiCall, total };
 };
 
 export default useFetchApiCall;
