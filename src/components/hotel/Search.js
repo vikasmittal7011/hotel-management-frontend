@@ -42,13 +42,10 @@ const Search = ({ setSearch, setSort, search }) => {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
                     const { latitude, longitude } = position.coords;
-                    // fetchWeather(`lat=${latitude}&lon=${longitude}`);
                     const data = await getAddress(latitude, longitude)
-                    console.log(data)
                     setSearch({ ...search, location: data.results[0].components.state })
                 },
                 (error) => {
-                    console.log(error.message)
                     alert.error("Plase enable location to use current location")
                 }
             );

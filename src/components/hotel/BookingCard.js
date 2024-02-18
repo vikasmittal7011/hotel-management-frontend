@@ -44,6 +44,9 @@ const BookingCard = ({ hotel }) => {
         } else if (bookingInfo.guest < 1) {
             alert.error("Plase enter a valid guest number")
             return
+        } else if (new Date() > new Date(bookingInfo.checkIn)) {
+            alert.error("CheckIn date can't be least at current date")
+            return
         } else if (bookingInfo.checkIn > bookingInfo.checkOut) {
             alert.error("CheckIn date must be earlier than checkout date")
             return
