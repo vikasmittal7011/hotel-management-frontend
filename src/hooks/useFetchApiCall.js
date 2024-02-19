@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
-// import useToastBox from './useToastBox';
-
 const useFetchApiCall = () => {
-  // const { showToast } = useToastBox();
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState();
 
@@ -36,11 +33,11 @@ const useFetchApiCall = () => {
         setTotal(response.headers.get("X-Total-Count"))
         return data;
       } else {
-        // showToast('Error', data.message, 'error');
-        return false;
+        return data;
       }
     } catch (err) {
-      // showToast('Error', err.message, 'error');
+      setLoading(false)
+      return { message: err.message };
     }
   };
 

@@ -15,11 +15,13 @@ export function UserContextProvider({ children }) {
         setLoading(true)
         try {
             const response = await apiCall("/user")
-            setUser(response.user)
+            if (response.success) {
+                setUser(response.user)
+                setLoading(false)
+            }
             setLoading(false)
         } catch (err) {
             setLoading(false)
-
         }
     }
 

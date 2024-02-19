@@ -62,11 +62,13 @@ const Login = () => {
 
             <div className="mx-auto max-w-xl mt-4 center">
                 <form>
-                    <div>
+                    <div className="relative">
                         <Input onClick={onChange} name="Email" type="email" placeholder="Enter your email..." id="email" value={credentials.email} />
                         <Input onClick={onChange} name="Pasword" type="password" placeholder="Enter your paasword..." id="password" value={credentials.password} />
+                        <Link to="/forgot-password" className="absolute right-0 mt-2 text-blue-600 underline text-right">Forget Password?</Link>
 
-                        <div className="mt-6">
+
+                        <div className="mt-12">
                             <button disabled={loading} type="submit" onClick={loginuser} className={`w-full rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 flex justify-center items-center gap-2 ${loading ? "cursor-not-allowed" : "cursor-pointer"} `}> <ClipLoader color='white' size="20px" loading={loading} /> <div>Login</div> </button>
                         </div>
                         <div className="flex justify-around mt-2">
