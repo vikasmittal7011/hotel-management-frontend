@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ConfirmBooking, ConfirmOTP, EditHotelForm, ForgotPassword, Home, HotelDetails, Login, Profile, Register, ResetPassword } from "./pages";
+import { BookingConfirm, BookingFailer, ConfirmBooking, ConfirmOTP, EditHotelForm, ForgotPassword, Home, HotelDetails, Login, Profile, Register, ResetPassword } from "./pages";
 import { Route, Routes } from "react-router-dom";
 import AlertTemplate from "react-alert-template-basic";
 import { positions, Provider } from "react-alert";
@@ -34,6 +34,9 @@ const App = () => {
             <Route path="/reset-password" exact element={<ResetPassword />} />
 
             <Route path="/edit-hotel/:id" exact element={<EditHotelForm />}></Route>
+
+            <Route path="/booking-failer/:message" exact element={<BookingFailer />}></Route>
+            <Route path="/booking-confirm/:id" exact element={<BookingConfirm />}></Route>
 
             <Route path="/profile/:subpage?" exact element={<UserProtect> <Profile /> </UserProtect>}></Route>
 

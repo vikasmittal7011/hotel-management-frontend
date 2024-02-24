@@ -7,6 +7,7 @@ import useFetchApiCall from "../hooks/useFetchApiCall";
 import { UserContext } from "../context/UserContext";
 import { amountAfterTax } from "../utils/constant";
 import { useAlert } from "react-alert";
+import { ClipLoader } from "react-spinners";
 
 const ConfirmBooking = () => {
 
@@ -32,15 +33,54 @@ const ConfirmBooking = () => {
         setBookingInfo({ ...bookingInfo, [id]: value })
     }
 
+    const handleOnlinePayment = async () => {
+        const { contact, checkIn, checkOut, guest, totalAmount, paymentMethod } = bookingInfo
+
+        const callback_url = `${process.env.REACT_APP_API}/booking/paymentverification?checkIn=${checkIn}&checkOut=${checkOut}&contact=${contact}&guest=${guest}&totalAmount=${totalAmount}&paymentMethod=${paymentMethod}&hotel=${hotel.id}`
+        const { success, data, key, message } = await apiCall("/booking/checkout", "POST", { ...bookingInfo, hotel: hotel.id })
+
+        if (success) {
+            const options = {
+                key,
+                amount: data.amount,
+                currency: "INR",
+                name: "Apdelights",
+                description: "Apdelights Online Payment",
+                image: hotel.photos[0],
+                order_id: data.id,
+                callback_url,
+                prefill: {
+                    name: user.name,
+                    email: user.email,
+                    contact: bookingInfo.contact
+                },
+                notes: {
+                    address: "Razorpay Corporate Office",
+                    bookingInfo: { ...bookingInfo, hotel: hotel.id }
+                },
+                theme: {
+                    color: "#3399cc"
+                }
+            };
+            const razor = new window.Razorpay(options);
+            razor.open()
+        } else {
+            alert.error(message)
+        }
+    }
+
     const handleClick = async (e) => {
         e.preventDefault()
         try {
-            const response = await apiCall("/booking", "POST", { ...bookingInfo, hotel: hotel.id })
-            if (response.success) {
-                alert.success("Booking is done")
-                navigate("/profile/booking")
+            if (bookingInfo.paymentMethod === "Card") {
+                handleOnlinePayment()
             } else {
-                alert.error(response.message || "Something is wrong, plase try again later!!")
+                const response = await apiCall("/booking", "POST", { ...bookingInfo, hotel: hotel.id })
+                if (response.success) {
+                    navigate("/booking-confirm/" + response.booking.id)
+                } else {
+                    navigate("/booking-failer/" + response.message || "Something is wrong, plase try again later!!")
+                }
             }
         } catch (error) {
             alert.error(error.message)
@@ -80,7 +120,7 @@ const ConfirmBooking = () => {
                                 {user?.name} <br /> {user?.email}
                             </p>
                             <div className="md:block hidden">
-                                <button disabled={loading} onClick={handleClick} className="cursor-pointer bg-primary text-white w-full rounded-md py-1 md:py-3">Confirm Booking</button>
+                                <button disabled={loading} onClick={handleClick} className={`bg-primary text-white w-full rounded-md py-1 md:py-3 flex justify-center items-center gap-2 ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}> <ClipLoader color='white' size="20px" loading={loading} /> <div>Confirm Booking</div></button>
                                 <p onClick={handleCancel} className="text-blue-600 underline text-center my-2 cursor-pointer">Cancel Booking</p>
                             </div>
                         </div>
@@ -106,7 +146,7 @@ const ConfirmBooking = () => {
                             </div>
 
                             <div className="block md:hidden">
-                                <button disabled={loading} onClick={handleClick} className="my-5 bg-primary text-white w-full rounded-md py-1 md:py-3">Confirm Booking</button>
+                                <button disabled={loading} onClick={handleClick} className={`bg-primary text-white w-full rounded-md py-1 md:py-3 flex justify-center items-center gap-2 ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}>  <ClipLoader color='white' size="20px" loading={loading} /> <div>Confirm Booking</div> </button>
                                 <p onClick={handleCancel} className="text-blue-600 underline text-center my-2 cursor-pointer">Cancel Booking</p>
                             </div>
 

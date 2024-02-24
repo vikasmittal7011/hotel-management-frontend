@@ -10,5 +10,7 @@ const ConfirmBooking = lazy(() => import("./ConfirmBooking"));
 const EditHotelForm = lazy(() => import("./EditHotelForm"));
 const ForgotPassword = lazy(() => import("./ForgotPassword"));
 const ResetPassword = lazy(() => import("./ResetPassword"));
+const BookingConfirm = lazy(() => import("./BookingConfirm"));
+const BookingFailer = lazy(() => import("./BookingFailer"));
 
-export { Home, Login, Register, ConfirmOTP, Profile, HotelDetails, ConfirmBooking, EditHotelForm, ForgotPassword, ResetPassword };
+export { Home, Login, BookingConfirm, BookingFailer, Register, ConfirmOTP, Profile, HotelDetails, ConfirmBooking, EditHotelForm, ForgotPassword, ResetPassword };

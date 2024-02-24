@@ -3,6 +3,7 @@ import { numbersOfNigts } from "../../utils/constant"
 import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { UserContext } from "../../context/UserContext"
+import { BanknotesIcon } from "@heroicons/react/24/outline"
 
 const BookingCard = ({ booking }) => {
 
@@ -103,6 +104,15 @@ const BookingCard = ({ booking }) => {
 
                                         {book.price} /-
                                     </div>
+                                </div>
+                            </div>
+
+                            <Border />
+
+                            <div className="flex gap-2 items-center text-lg">
+                                <div className="flex items-center gap-1">
+                                    <BanknotesIcon className={"w-6 h-6"} />
+                                    <p>Payment : {book.paymentDone ? "Done" : "Pending"}</p>
                                 </div>
                             </div>
 
