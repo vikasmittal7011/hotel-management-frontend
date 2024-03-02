@@ -1,10 +1,11 @@
 import { useState } from "react";
-import Input from "../components/form/Input";
-import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
+import { ClipLoader } from "react-spinners";
+import { Link, useNavigate } from "react-router-dom";
+
+import Input from "../components/form/Input";
 import NavBar from "../components/common/NavBar";
 import useFetchApiCall from '../hooks/useFetchApiCall';
-import { ClipLoader } from "react-spinners";
 
 
 const Register = () => {

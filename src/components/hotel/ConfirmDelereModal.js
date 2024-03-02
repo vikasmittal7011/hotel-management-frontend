@@ -1,9 +1,10 @@
+import { useAlert } from 'react-alert'
 import { Fragment, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+
 import useFetchApiCall from '../../hooks/useFetchApiCall'
-import { useAlert } from 'react-alert'
-import { useNavigate } from 'react-router-dom'
 
 const ConfirmDelereModal = ({ open, setOpen, id }) => {
 

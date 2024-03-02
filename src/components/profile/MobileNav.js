@@ -1,7 +1,7 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { Bars3Icon } from "@heroicons/react/24/outline"
-import { Fragment, useRef } from "react"
 import { Link } from "react-router-dom"
+import { Fragment, useRef } from "react"
+import { Bars3Icon } from "@heroicons/react/24/outline"
+import { Disclosure, Menu, Transition } from "@headlessui/react"
 
 const MobileNav = ({ user }) => {
 

@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
-import useFetchApiCall from "../../hooks/useFetchApiCall"
 import { useAlert } from "react-alert"
+
 import Card from "../hotel/Card"
-import Loader from "../common/Loader"
-import { ITEM_PAGE_PER } from "../../utils/constant"
-import Pagination from "../hotel/Pagination"
 import Search from "../hotel/Search"
+import Loader from "../common/Loader"
+import Pagination from "../hotel/Pagination"
+import { ITEM_PAGE_PER } from "../../utils/constant"
+import useFetchApiCall from "../../hooks/useFetchApiCall"
 
 const Hotels = () => {
 
@@ -70,7 +71,7 @@ const Hotels = () => {
             }
 
             {loading === false &&
-                hotels.length === 0 &&
+                hotels?.length === 0 &&
                 <div className="text-center -mt-10 font-bold text-2xl">No Match Found</div>
             }
         </>

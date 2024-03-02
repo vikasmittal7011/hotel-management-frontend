@@ -1,6 +1,7 @@
 import { useContext } from "react"
-import { UserContext } from "../../context/UserContext"
+
 import { useNavigate } from "react-router-dom"
+import { UserContext } from "../../context/UserContext"
 
 const UserProtect = ({ children }) => {
     const navigate = useNavigate

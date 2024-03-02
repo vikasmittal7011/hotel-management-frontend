@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import useFetchApiCall from "../hooks/useFetchApiCall";
+
 import Loader from "../components/common/Loader";
+import useFetchApiCall from "../hooks/useFetchApiCall";
+
 export const UserContext = createContext()
 
 export function UserContextProvider({ children }) {

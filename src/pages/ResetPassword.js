@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useAlert } from "react-alert";
+import { Link, Navigate } from "react-router-dom";
 
 import Input from "../components/form/Input";
-import { Link, Navigate } from "react-router-dom";
-import { useAlert } from "react-alert";
 import useFetchApiCall from "../hooks/useFetchApiCall";
 
 const ResetPassword = () => {

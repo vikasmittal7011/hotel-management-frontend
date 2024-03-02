@@ -1,5 +1,5 @@
-import NavBar from "../components/common/NavBar";
 import Hotels from "../components/home/Hotels";
+import NavBar from "../components/common/NavBar";
 
 const Home = () => {
   return (

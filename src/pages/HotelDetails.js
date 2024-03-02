@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useNavigate, useParams } from "react-router-dom"
-import NavBar from "../components/common/NavBar"
 import { useAlert } from "react-alert"
 import { useContext, useEffect, useState } from "react"
-import useFetchApiCall from "../hooks/useFetchApiCall"
-import Loader from "../components/common/Loader"
-import Images from "../components/hotel/Images"
-import BookingCard from "../components/hotel/BookingCard"
-import AllImages from "../components/hotel/AllImages"
+import { useNavigate, useParams } from "react-router-dom"
+
 import { perks } from "../utils/constant"
+import Images from "../components/hotel/Images"
+import Loader from "../components/common/Loader"
+import NavBar from "../components/common/NavBar"
 import { UserContext } from "../context/UserContext"
+import AllImages from "../components/hotel/AllImages"
+import useFetchApiCall from "../hooks/useFetchApiCall"
+import BookingCard from "../components/hotel/BookingCard"
 import ConfirmDelereModal from "../components/hotel/ConfirmDelereModal"
 
 const HotelDetails = () => {
@@ -66,7 +67,7 @@ const HotelDetails = () => {
                 <Loader />
                 :
                 <div className="overflow-visible">
-                    {user.role === "admin" &&
+                    {user?.role === "admin" &&
                         <div className="flex justify-between">
                             <button onClick={() => { navigate(`/edit-hotel/${hotel.id}`) }} className="mt-5 md:mx-5 bg-primary text-white w-auto px-5 py-2 rounded-md">Edit</button>
                             <button onClick={() => { setOpen(true) }} className="mt-5 md:mx-5 bg-gray-500 text-white w-auto px-5 py-2 rounded-md">Delete</button>

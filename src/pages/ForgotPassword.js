@@ -1,10 +1,10 @@
 import { useState } from "react";
-
-import Input from "../components/form/Input";
 import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
-import useFetchApiCall from "../hooks/useFetchApiCall";
 import { ClipLoader } from "react-spinners";
+
+import Input from "../components/form/Input";
+import useFetchApiCall from "../hooks/useFetchApiCall";
 
 const ForgotPassword = () => {
 

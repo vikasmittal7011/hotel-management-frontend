@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useState, useEffect } from "react"
-import { Navigate, useNavigate } from "react-router-dom";
-import Input from "../components/form/Input";
-import PaymentMethods from "../components/hotel/PaymentMethods ";
-import useFetchApiCall from "../hooks/useFetchApiCall";
-import { UserContext } from "../context/UserContext";
-import { amountAfterTax } from "../utils/constant";
 import { useAlert } from "react-alert";
 import { ClipLoader } from "react-spinners";
+import { useContext, useState, useEffect } from "react"
+import { Navigate, useNavigate } from "react-router-dom";
+
+import Input from "../components/form/Input";
+import { amountAfterTax } from "../utils/constant";
+import { UserContext } from "../context/UserContext";
+import useFetchApiCall from "../hooks/useFetchApiCall";
+import PaymentMethods from "../components/hotel/PaymentMethods ";
 
 const ConfirmBooking = () => {
 

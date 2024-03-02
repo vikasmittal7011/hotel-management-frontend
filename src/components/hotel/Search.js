@@ -1,5 +1,5 @@
-import { sortOptions } from "../../utils/constant";
 import Select from "../form/Select";
+import { sortOptions } from "../../utils/constant";
 
 const Search = ({ setSearch, setSort, search }) => {
 

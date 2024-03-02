@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
-import useFetchApiCall from "../../hooks/useFetchApiCall"
+
 import Loader from "../common/Loader"
 import BookingCard from "./BookingCard";
+import useFetchApiCall from "../../hooks/useFetchApiCall"
 
 const AdminBooking = () => {
 

@@ -1,12 +1,13 @@
-import { Link, useParams } from "react-router-dom"
-import NavBar from "../components/common/NavBar"
-import Infomation from "../components/profile/Infomation"
-import Booking from "../components/profile/Booking"
-import AddHotelForm from "../components/profile/AddHotelForm"
 import { useContext } from "react"
+import { Link, useParams } from "react-router-dom"
+
+import NavBar from "../components/common/NavBar"
+import Booking from "../components/profile/Booking"
 import { UserContext } from "../context/UserContext"
-import AdminBooking from "../components/profile/AdminBooking"
 import MobileNav from "../components/profile/MobileNav"
+import Infomation from "../components/profile/Infomation"
+import AddHotelForm from "../components/profile/AddHotelForm"
+import AdminBooking from "../components/profile/AdminBooking"
 
 const Profile = () => {
 

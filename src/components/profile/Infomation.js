@@ -1,7 +1,8 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+
 import { UserContext } from "../../context/UserContext"
 import useFetchApiCall from "../../hooks/useFetchApiCall"
-import { useNavigate } from "react-router-dom"
 
 const Infomation = () => {
 

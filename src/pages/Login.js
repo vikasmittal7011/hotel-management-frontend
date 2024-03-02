@@ -1,11 +1,12 @@
+import { useAlert } from "react-alert";
+import { ClipLoader } from "react-spinners";
 import { useContext, useState } from "react"
+import { Link, useNavigate } from "react-router-dom";
+
 import Input from "../components/form/Input"
 import NavBar from "../components/common/NavBar"
-import { Link, useNavigate } from "react-router-dom";
-import useFetchApiCall from "../hooks/useFetchApiCall";
-import { useAlert } from "react-alert";
 import { UserContext } from "../context/UserContext";
-import { ClipLoader } from "react-spinners";
+import useFetchApiCall from "../hooks/useFetchApiCall";
 
 const Login = () => {
 

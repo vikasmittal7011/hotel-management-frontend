@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
-import Input from "../form/Input";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { useContext, useEffect, useState } from "react";
+
+import Input from "../form/Input";
 import { amountAfterTax } from "../../utils/constant";
+import { UserContext } from "../../context/UserContext";
 
 const BookingCard = ({ hotel }) => {
 

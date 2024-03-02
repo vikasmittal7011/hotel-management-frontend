@@ -1,11 +1,12 @@
-import NavBar from '../components/common/NavBar'
-import Input from '../components/form/Input'
-import { useContext, useState } from 'react';
-import useFetchApiCall from '../hooks/useFetchApiCall';
-import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import { UserContext } from '../context/UserContext';
 import { ClipLoader } from 'react-spinners';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Input from '../components/form/Input'
+import NavBar from '../components/common/NavBar'
+import { UserContext } from '../context/UserContext';
+import useFetchApiCall from '../hooks/useFetchApiCall';
 
 const ConfirmOTP = () => {
 

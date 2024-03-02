@@ -1,12 +1,12 @@
 import { Suspense } from "react";
-import { BookingConfirm, BookingFailer, ConfirmBooking, ConfirmOTP, EditHotelForm, ForgotPassword, Home, HotelDetails, Login, Profile, Register, ResetPassword } from "./pages";
 import { Route, Routes } from "react-router-dom";
-import AlertTemplate from "react-alert-template-basic";
 import { positions, Provider } from "react-alert";
-import { UserContextProvider } from "./context/UserContext"
+import AlertTemplate from "react-alert-template-basic";
+
 import Loader from "./components/common/Loader";
 import UserProtect from "./components/protect/UserProtect";
-
+import { UserContextProvider } from "./context/UserContext"
+import { BookingConfirm, BookingFailer, ConfirmBooking, ConfirmOTP, EditHotelForm, ForgotPassword, Home, HotelDetails, Login, Profile, Register, ResetPassword } from "./pages";
 
 const App = () => {
 
